@@ -182,10 +182,18 @@ module.exports = electron = (options) ->
           (next) ->
             util.log PLUGIN_NAME, "#{options.src} -> #{targetDir} distributing"
             wrench.mkdirSyncRecursive targetDirPath
-            wrench.copyDirSyncRecursive options.src, targetDirPath,
-              forceDelete: true
-              excludeHiddenUnix: false
-              inflateSymlinks: false
+
+            # Major bug here
+            # if src: '.', then you end up with a full disk and an undeletable folder
+            # You should use the gulp src list instead
+            # e.g.
+            # gulp.src(['*.js', '*.json'])
+            #     .pipe(electron({ ... }))
+            #     .pipe(gulp.dest('release'))
+            #wrench.copyDirSyncRecursive options.src, targetDirPath,
+            #  forceDelete: true
+            #  excludeHiddenUnix: false
+            #  inflateSymlinks: false
             next()
 
           # packaging app.
