@@ -71,7 +71,7 @@ If you using windows: install 7z(http://www.7-zip.org/).
 * `cache` The download path for the electron package, **required**.
 * `release` is where the release applictions path, **required**.
 * `version` the version of the electron release to be download from the GitHub page, **required**.
-* `platforms` Support `['darwin','win32','linux','darwin-x64','linux-ia32','linux-x64','win32-ia32','win64-64']`, default is `darwin-x64`. If verion is under `v0.13.0` must use `['darwin','win32','linux']`.
+* `platforms` Support `['darwin','win32','linux','darwin-x64','linux-ia32','linux-x64','win32-ia32','win32-x64']`, default is `darwin-x64`. If verion is under `v0.13.0` must use `['darwin','win32','linux']`.
 * `apm` Path to the `atom-package-manager` executable. If not specified the default behavior will be to use the globally installed `apm` executable.
 * `rebuild` Default is `false`, when set to `true` then rebuild native-modules.
 * `asar` Default is `false`, when set to `true` then asar pack your app directory. see more docs(https://github.com/atom/electron/blob/master/docs/tutorial/application-packaging.md).
