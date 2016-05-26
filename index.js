@@ -503,7 +503,10 @@ asarPackaging = function(src, target, opts) {
   return new Promise(function(resolve) {
     util.log(PLUGIN_NAME, "packaging app.asar " + escSrc + ", " + escTarget);
     return asar.createPackageWithOptions(escSrc, escTarget, opts, function() {
-      return resolve();
+      fs.remove(escSrc, function() {
+        util.log(PLUGIN_NAME, 'removing app ' + escSrc);
+        return resolve();
+      });
     });
   });
 };
