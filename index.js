@@ -504,7 +504,7 @@ asarPackaging = function(src, target, opts) {
     util.log(PLUGIN_NAME, "packaging app.asar " + escSrc + ", " + escTarget);
     return asar.createPackageWithOptions(escSrc, escTarget, opts, function() {
       fs.remove(escSrc, function() {
-        util.log(PLUGIN_NAME, 'removing app ' + escSrc);
+        util.log(PLUGIN_NAME, 'removing dir ' + escSrc);
         return resolve();
       });
     });

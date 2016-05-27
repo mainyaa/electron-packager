@@ -408,7 +408,7 @@ asarPackaging = (src, target, opts) ->
     util.log PLUGIN_NAME, "packaging app.asar #{escSrc}, #{escTarget}"
     asar.createPackageWithOptions escSrc, escTarget, opts, ->
       fs.remove escSrc, ->
-        util.log PLUGIN_NAME, 'removing app dir' + escSrc
+        util.log PLUGIN_NAME, 'removing dir ' + escSrc
         resolve()
       return
 
