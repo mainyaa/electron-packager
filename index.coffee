@@ -407,7 +407,11 @@ asarPackaging = (src, target, opts) ->
   new Promise (resolve) ->
     util.log PLUGIN_NAME, "packaging app.asar #{escSrc}, #{escTarget}"
     asar.createPackageWithOptions escSrc, escTarget, opts, ->
-      resolve()
+      fs.remove escSrc, (err) ->
+        util.log PLUGIN_NAME, 'removing dir ' + escSrc
+        resolve()
+        return
+      return
 
 signDarwin = (signingCmd) ->
   promiseList = []
