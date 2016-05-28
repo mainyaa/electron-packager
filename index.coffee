@@ -411,6 +411,7 @@ asarPackaging = (src, target, opts) ->
         util.log PLUGIN_NAME, 'removing dir ' + escSrc
         resolve()
         return
+      return
 
 signDarwin = (signingCmd) ->
   promiseList = []
