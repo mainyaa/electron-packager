@@ -407,8 +407,8 @@ asarPackaging = (src, target, opts) ->
   new Promise (resolve) ->
     util.log PLUGIN_NAME, "packaging app.asar #{escSrc}, #{escTarget}"
     asar.createPackageWithOptions escSrc, escTarget, opts, ->
-      fs.remove escSrc, ->
-        util.log PLUGIN_NAME, 'removing dir ' + escSrc
+      fs.remove escSrc, (err) ->
+        util.log PLUGIN_NAME, "removing dir " + escSrc
         resolve()
       return
 
