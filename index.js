@@ -503,9 +503,9 @@ asarPackaging = function(src, target, opts) {
   return new Promise(function(resolve) {
     util.log(PLUGIN_NAME, "packaging app.asar " + escSrc + ", " + escTarget);
     return asar.createPackageWithOptions(escSrc, escTarget, opts, function() {
-      fs.remove(escSrc, function(err) {
-        util.log(PLUGIN_NAME, "removing dir " + escSrc);
-        return resolve();
+      return fs.remove(escSrc, function(err) {
+        util.log(PLUGIN_NAME, 'removing dir ' + escSrc);
+        resolve();
       });
     });
   });
