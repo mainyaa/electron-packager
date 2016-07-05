@@ -210,7 +210,7 @@ module.exports = electron = (options) ->
       new Promise (resolve,reject) ->
         Promise.resolve().then ->
           # If not downloaded then download the special package.
-          download cacheFile, cachePath, options.version, cacheZip, options.token
+          download cacheFile, cachePath, options.version, cacheZip, options.token, options.requestOptions
         .then ->
           # If not unziped then unzip the zip file.
           # Check if there already have an version file.
@@ -292,7 +292,7 @@ getApmPath = ->
   apmPath = path.join 'apm', 'node_modules', 'atom-package-manager', 'bin', 'apm'
   apmPath = 'apm' unless isFile apmPath
 
-download = (cacheFile, cachePath, version, cacheZip, token) ->
+download = (cacheFile, cachePath, version, cacheZip, token, requestOptions) ->
   if isFile cacheFile
     util.log PLUGIN_NAME, "download skip: already exists"
     return Promise.resolve()
@@ -305,7 +305,8 @@ download = (cacheFile, cachePath, version, cacheZip, token) ->
       repo: 'atom/electron'
       tag: version
       name: cacheZip
-      token: token
+      token: token,
+      requestOptions: requestOptions
     .on 'error', (error) ->
       throw new PluginError PLUGIN_NAME, error
     .on 'size', (size) ->
