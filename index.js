@@ -247,7 +247,7 @@ module.exports = electron = function(options) {
       };
       return new Promise(function(resolve, reject) {
         return Promise.resolve().then(function() {
-          return download(cacheFile, cachePath, options.version, cacheZip, options.token);
+          return download(cacheFile, cachePath, options.version, cacheZip, options.token, options.requestOptions);
         }).then(function() {
           return unzip(cacheFile, cacheedPath, unpackagingCmd[process.platform]);
         }).then(function() {
@@ -357,7 +357,7 @@ getApmPath = function() {
   }
 };
 
-download = function(cacheFile, cachePath, version, cacheZip, token) {
+download = function(cacheFile, cachePath, version, cacheZip, token, requestOptions) {
   if (isFile(cacheFile)) {
     util.log(PLUGIN_NAME, "download skip: already exists");
     return Promise.resolve();
@@ -371,7 +371,8 @@ download = function(cacheFile, cachePath, version, cacheZip, token) {
       repo: 'atom/electron',
       tag: version,
       name: cacheZip,
-      token: token
+      token: token,
+      requestOptions: requestOptions
     }).on('error', function(error) {
       throw new PluginError(PLUGIN_NAME, error);
     }).on('size', function(size) {
