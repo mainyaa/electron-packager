@@ -485,8 +485,12 @@ distributeMacIcon = function(src, targetAppPath) {
 
 distributeWinIcon = function(src, targetAppPath) {
   return new Promise(function(resolve) {
-    rcedit(targetAppPath, src, resolve);
-    return resolve();
+    return rcedit(targetAppPath, src, function(err) {
+      if (err != null) {
+        util.log(PLUGIN_NAME, "distributeWinIcon " + err);
+      }
+      return resolve();
+    });
   });
 };
 

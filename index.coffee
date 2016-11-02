@@ -394,8 +394,10 @@ distributeMacIcon = (src, targetAppPath) ->
 
 distributeWinIcon = (src, targetAppPath) ->
   new Promise (resolve) ->
-    rcedit targetAppPath, src, resolve
-    resolve()
+    rcedit targetAppPath, src, (err) ->
+      if err?
+        util.log PLUGIN_NAME, "distributeWinIcon #{err}"
+      resolve()
 
 rebuild = (cmd) ->
   new Promise (resolve) ->
